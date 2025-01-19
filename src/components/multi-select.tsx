@@ -147,7 +147,7 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
                 size="sm"
                 variant="secondary"
                 onClick={handleSelectAll}
-                className="flex-1 bg-gray-700 hover:bg-gray-800 text-xs sm:text-sm py-1.5 h-8"
+                className="flex-1 bg-white hover:bg-gray-500  hover:text-white text-xs sm:text-sm py-1.5 h-8"
               >
                 Select All
               </Button>
@@ -155,7 +155,7 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
                 size="sm"
                 variant="outline"
                 onClick={handleDeselectAll}
-                className="flex-1 border-gray-700 hover:bg-gray-800 text-xs sm:text-sm py-1.5 h-8"
+                className="flex-1 border-gray-700 bg-gray-600 text-white hover:bg-gray-800 hover:text-white text-xs sm:text-sm py-1.5 h-8"
               >
                 Clear All
               </Button>
