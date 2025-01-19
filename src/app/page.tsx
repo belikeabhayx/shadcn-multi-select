@@ -50,7 +50,11 @@ const Page = () => {
  ];
 
   const socialLinks = [
-    { icon: Github, label: "GitHub", url: "https://github.com/belikeabhayx" },
+    {
+      icon: Github,
+      label: "GitHub",
+      url: "https://github.com/belikeabhayx/shadcn-multi-select",
+    },
     {
       icon: Twitter,
       label: "Twitter",

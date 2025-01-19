@@ -65,7 +65,7 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
     };
 
     const defaultRenderOption = (option: Option) => (
-      <div className="flex items-start gap-3 p-2">
+      <div className="flex items-start gap-2 sm:gap-3 p-1.5 sm:p-2">
         <div
           className={cn(
             "mt-1 h-4 w-4 border border-gray-700 rounded-sm flex items-center justify-center transition-colors",
@@ -78,10 +78,14 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
             <Check className="h-3 w-3 text-gray-900" />
           )}
         </div>
-        <div>
-          <div className="font-medium text-gray-200">{option.label}</div>
+        <div className="min-w-0 flex-1">
+          <div className="font-medium text-sm sm:text-base text-gray-200 truncate">
+            {option.label}
+          </div>
           {option.description && (
-            <div className="text-xs text-gray-400">{option.description}</div>
+            <div className="text-xs text-gray-400 truncate">
+              {option.description}
+            </div>
           )}
         </div>
       </div>
@@ -90,7 +94,7 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
     const defaultRenderBadge = (option: Option) => (
       <Badge
         variant="secondary"
-        className="rounded-md bg-gray-800 text-gray-200"
+        className="rounded-md bg-gray-800 text-gray-200 text-xs sm:text-sm max-w-[150px] sm:max-w-none truncate"
       >
         {option.label}
       </Badge>
@@ -106,15 +110,16 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
             aria-expanded={open}
             disabled={disabled}
             className={cn(
-              "w-full justify-between h-auto min-h-[2.75rem] px-3 bg-gray-900/50 border-gray-700 hover:bg-gray-800/50 hover:border-gray-600",
+              "w-full justify-between h-auto min-h-[2.5rem] sm:min-h-[2.75rem] px-2 sm:px-3 bg-gray-900/50 border-gray-700 hover:bg-gray-800/50 hover:border-gray-600",
+              "text-sm sm:text-base",
               className
             )}
           >
-            <div className="flex flex-wrap gap-1 py-0.5">
+            <div className="flex flex-wrap gap-1 py-0.5 max-w-full">
               {value.length === 0 ? (
-                <span className="text-gray-500">{placeholder}</span>
+                <span className="text-gray-500 truncate">{placeholder}</span>
               ) : (
-                <div className="flex flex-wrap gap-1">
+                <div className="flex flex-wrap gap-1 max-w-full">
                   {value.map((val) => {
                     const option = options.find((opt) => opt.value === val);
                     if (!option) return null;
@@ -131,16 +136,18 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-full p-0 bg-gray-900 border-gray-700"
+          className="w-[312px] md:w-[380px] lg:w-[520px] p-0 bg-gray-900 border-gray-700"
           align="start"
+          side="bottom"
+          sideOffset={4}
         >
           {showSelectButtons && (
-            <div className="p-3 flex gap-2 border-b border-gray-800 bg-gray-900/50">
+            <div className="p-2 sm:p-3 flex gap-2 border-b border-gray-800 bg-gray-900/50">
               <Button
                 size="sm"
                 variant="secondary"
                 onClick={handleSelectAll}
-                className="flex-1 bg-gray-700 hover:bg-gray-800"
+                className="flex-1 bg-gray-700 hover:bg-gray-800 text-xs sm:text-sm py-1.5 h-8"
               >
                 Select All
               </Button>
@@ -148,18 +155,27 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
                 size="sm"
                 variant="outline"
                 onClick={handleDeselectAll}
-                className="flex-1 border-gray-700 hover:bg-gray-800"
+                className="flex-1 border-gray-700 hover:bg-gray-800 text-xs sm:text-sm py-1.5 h-8"
               >
                 Clear All
               </Button>
             </div>
           )}
-          <div className="p-2 space-y-1" style={{ maxHeight }}>
+          <div
+            className="p-1.5 sm:p-2 space-y-0.5 sm:space-y-1"
+            style={{
+              maxHeight:
+                typeof window !== "undefined"
+                  ? Math.min(maxHeight, window.innerHeight - 150)
+                  : maxHeight,
+            }}
+          >
             {options.map((option) => (
               <div
                 key={option.value}
                 className={cn(
                   "cursor-pointer hover:bg-gray-800/50 transition-colors rounded-md",
+                  "active:bg-gray-700/70 touch-action-manipulation",
                   value.includes(option.value) && "bg-gray-800/70",
                   disabled && "pointer-events-none opacity-50"
                 )}
