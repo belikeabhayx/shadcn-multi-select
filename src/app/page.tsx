@@ -12,9 +12,9 @@ import {
 } from "@/components/ui/card";
 import { Code2, Github, Twitter, Linkedin } from "lucide-react";
 
-import React, { useState } from "react";
+import React from "react";
 
-const page = () => {
+const Page = () => {
 
  const languages = [
    {
@@ -133,4 +133,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
