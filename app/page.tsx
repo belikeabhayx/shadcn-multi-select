@@ -1,101 +1,136 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { MultiSelect } from "@/components/multi-select";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Code2, Github, Twitter, Linkedin } from "lucide-react";
+
+import React, { useState } from "react";
+
+const page = () => {
+
+ const languages = [
+   {
+     value: "python",
+     label: "Python",
+     description:
+       "A versatile language known for its simplicity and readability",
+   },
+   {
+     value: "javascript",
+     label: "JavaScript",
+     description:
+       "The language of the web, powering frontend and backend development",
+   },
+   {
+     value: "java",
+     label: "Java",
+     description:
+       "A class-based, object-oriented programming language designed for portability",
+   },
+   {
+     value: "rust",
+     label: "Rust",
+     description:
+       "A systems language focusing on safety and performance without garbage collection",
+   },
+   {
+     value: "golang",
+     label: "Go",
+     description:
+       "A fast, statically typed language designed for simplicity and efficiency",
+   },
+ ];
+
+  const socialLinks = [
+    { icon: Github, label: "GitHub", url: "https://github.com/belikeabhayx" },
+    {
+      icon: Twitter,
+      label: "Twitter",
+      url: "https://x.com/belikeabhayx",
+    },
+    {
+      icon: Linkedin,
+      label: "LinkedIn",
+      url: "https://www.linkedin.com/in/belikeabhayx",
+    },
+  ];
+
+  const [selected, setSelected] = React.useState<string[]>([]);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center p-8">
+      <div className="max-w-2xl w-full mx-auto">
+        <div className="text-center mb-8 space-y-2">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 text-transparent bg-clip-text">
+            Shadcn Multi-Select Component
+          </h1>
+          <p className="text-gray-400 text-sm">
+            Powered by shadcn/ui select primitives
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <Card className="border-none shadow-2xl bg-gradient-to-b from-gray-900/90 to-black backdrop-blur-sm border border-gray-800">
+          <CardHeader className="space-y-4 pb-6">
+            <div className="flex items-center gap-2">
+              <Code2 className="h-6 w-6 text-white" />
+              <CardTitle className="text-2xl font-bold bg-gradient-to-r from-gray-100 to-gray-300 text-transparent bg-clip-text">
+                Language Selection
+              </CardTitle>
+            </div>
+            <CardDescription className="text-gray-400">
+              Choose your preferred coding languages from the list below
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <MultiSelect
+              options={languages}
+              value={selected}
+              onChange={setSelected}
+              placeholder="Select languages..."
+            />
+            <div className="mt-4">
+              <p className="text-sm text-gray-400 mb-2">
+                Selected languages: {selected.length} of {languages.length}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {selected.map((value) => (
+                  <Badge
+                    key={value}
+                    variant="secondary"
+                    className="px-3 py-1 rounded-md bg-gray-800 text-gray-200"
+                  >
+                    {languages.find((f) => f.value === value)?.label}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </CardContent>
+          <CardFooter className="border-t border-gray-800 mt-6">
+            <div className="w-full flex items-center justify-center gap-4 pt-4">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-gray-200 transition-colors"
+                >
+                  <link.icon className="h-5 w-5" />
+                </a>
+              ))}
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
     </div>
   );
-}
+};
+
+export default page;
